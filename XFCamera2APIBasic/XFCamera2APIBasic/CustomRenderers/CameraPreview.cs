@@ -5,10 +5,10 @@ namespace XFCamera2APIBasic.CustomRenderers
     public class CameraPreview : View
     {
         /// <summary>
-        /// プレビュー中か否かを表すプロパティを追加
+        /// プレビュー中か否かを表す
         /// </summary>
         public static readonly BindableProperty IsPreviewingProperty = BindableProperty.Create(
-            propertyName: "IsPreviewing",
+            propertyName: nameof(IsPreviewing),
             returnType: typeof(bool),
             declaringType: typeof(CameraPreview),
             defaultValue: false
@@ -24,11 +24,5 @@ namespace XFCamera2APIBasic.CustomRenderers
                 SetValue(IsPreviewingProperty, value);
             }
         }
-    }
-
-    public enum CameraOptions
-    {
-        Rear,
-        Front
     }
 }

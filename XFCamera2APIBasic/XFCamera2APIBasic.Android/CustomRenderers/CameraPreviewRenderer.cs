@@ -23,10 +23,13 @@ namespace XFCamera2APIBasic.Droid.CustomRenderers
             _droidCameraPreview = new DroidCameraPreview(_context);
         }
 
+        /// <summary>
+        /// 要素に変更があった場合に呼び出される
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnElementChanged(ElementChangedEventArgs<CameraPreview> e)
         {
             base.OnElementChanged(e);
-
 
             this.SetNativeControl(_droidCameraPreview);
 
@@ -38,6 +41,11 @@ namespace XFCamera2APIBasic.Droid.CustomRenderers
                 this.Control.IsPreviewing = this.Element.IsPreviewing;
             }
         }
+        /// <summary>
+        /// 要素のプロパティに変更があった場合に呼び出される
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             base.OnElementPropertyChanged(sender, e);
@@ -98,7 +106,7 @@ namespace XFCamera2APIBasic.Droid.CustomRenderers
             var surfaceTextureListener = new CameraSurfaceTextureListener(_cameraTexture);
             _cameraTexture.SurfaceTextureListener = surfaceTextureListener;
 
-            _cameraTexture.Visibility = ViewStates.Invisible;
+            _cameraTexture.Visibility = ViewStates.Visible;
         }
     }
 }

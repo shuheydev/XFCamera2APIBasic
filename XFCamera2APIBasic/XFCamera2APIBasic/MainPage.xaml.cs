@@ -19,7 +19,7 @@ namespace XFCamera2APIBasic
 
             this.Appearing += async (sender, e) =>
             {
-
+                //カメラ使用の許可をユーザーに尋ねる
                 if (await GetCameraPermission() != PermissionStatus.Granted)
                     return;
 
@@ -35,7 +35,7 @@ namespace XFCamera2APIBasic
             {
                 status = await Permissions.RequestAsync<Permissions.Camera>();
             }
-
+            
             return status;
         }
     }
