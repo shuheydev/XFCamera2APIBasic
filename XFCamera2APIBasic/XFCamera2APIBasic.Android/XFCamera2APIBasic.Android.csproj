@@ -59,9 +59,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomRenderers\CameraPreviewRenderer.cs" />
-    <Compile Include="CustomRenderers\Listeners\CameraCaptureListener.cs" />
-    <Compile Include="CustomRenderers\Listeners\CameraCaptureStateListener.cs" />
-    <Compile Include="CustomRenderers\Listeners\CameraStateListener.cs" />
+    <Compile Include="CustomRenderers\Listeners\CameraCaptureSessionListener.cs" />
+    <Compile Include="CustomRenderers\Listeners\CameraCaptureSessionStateListener.cs" />
+    <Compile Include="CustomRenderers\Listeners\CameraDeviceStateListener.cs" />
     <Compile Include="CustomRenderers\Listeners\CameraSurfaceTextureListener.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />

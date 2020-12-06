@@ -1,12 +1,11 @@
 ﻿using Android.Hardware.Camera2;
-using System;
 
 namespace XFCamera2APIBasic.Droid.CustomRenderers.Listeners
 {
     /// <summary>
     /// フレームごとに発生するイベントに対する処理を担う
     /// </summary>
-    public class CameraCaptureListener : CameraCaptureSession.CaptureCallback
+    public class CameraCaptureSessionListener : CameraCaptureSession.CaptureCallback
     {
         public override void OnCaptureStarted(CameraCaptureSession session, CaptureRequest request, long timestamp, long frameNumber)
         {

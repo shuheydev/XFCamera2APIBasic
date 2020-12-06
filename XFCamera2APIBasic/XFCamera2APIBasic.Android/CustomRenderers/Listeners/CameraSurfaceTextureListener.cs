@@ -4,7 +4,6 @@ using Android.Hardware.Camera2;
 using Android.OS;
 using Android.Views;
 using Java.Lang;
-using System;
 using System.Linq;
 
 namespace XFCamera2APIBasic.Droid.CustomRenderers.Listeners
@@ -36,10 +35,8 @@ namespace XFCamera2APIBasic.Droid.CustomRenderers.Listeners
         }
         public void OnSurfaceTextureUpdated(SurfaceTexture surface)
         {
-            //Frame毎に更新される
-            //https://stackoverflow.com/questions/29413431/how-to-get-single-preview-frame-in-camera2-api-android-5-0
-            var frame = Android.Graphics.Bitmap.CreateBitmap(_cameraTexture.Width, _cameraTexture.Height, Android.Graphics.Bitmap.Config.Argb8888);
-            _cameraTexture.GetBitmap(frame);
+            //プレビューに表示されている情報が更新されるたびに実行
+            //フレームごとですね
         }
 
         private void StartBackgroundThread()
@@ -71,9 +68,10 @@ namespace XFCamera2APIBasic.Droid.CustomRenderers.Listeners
             string cameraId = _cameraManager.GetCameraIdList().FirstOrDefault();
             CameraCharacteristics cameraCharacteristics = _cameraManager.GetCameraCharacteristics(cameraId);
             Android.Hardware.Camera2.Params.StreamConfigurationMap scm = (Android.Hardware.Camera2.Params.StreamConfigurationMap)cameraCharacteristics.Get(CameraCharacteristics.ScalerStreamConfigurationMap);
+            
             var previewSize = scm.GetOutputSizes((int)ImageFormatType.Jpeg)[0];
-
-            var cameraStateListener = new CameraStateListener(surface, previewSize, _backgroundHandler);
+            //CameraStateListenerを作ってOpenCameraにわたす
+            var cameraStateListener = new CameraDeviceStateListener(surface, previewSize, _backgroundHandler);
 
             _cameraManager.OpenCamera(cameraId, cameraStateListener, _backgroundHandler);
         }

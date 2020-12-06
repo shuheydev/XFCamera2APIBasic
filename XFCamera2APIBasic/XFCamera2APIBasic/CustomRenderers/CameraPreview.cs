@@ -1,30 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace XFCamera2APIBasic.CustomRenderers
 {
     public class CameraPreview : View
     {
-        public static readonly BindableProperty CameraProperty = BindableProperty.Create(
-            propertyName: "Camera",
-            returnType: typeof(CameraOptions),
-            declaringType: typeof(CameraPreview),
-            defaultValue: CameraOptions.Rear
-            );
-        public CameraOptions Camera
-        {
-            get
-            {
-                return (CameraOptions)GetValue(CameraProperty);
-            }
-            set
-            {
-                SetValue(CameraProperty, value);
-            }
-        }
-
+        /// <summary>
+        /// プレビュー中か否かを表すプロパティを追加
+        /// </summary>
         public static readonly BindableProperty IsPreviewingProperty = BindableProperty.Create(
             propertyName: "IsPreviewing",
             returnType: typeof(bool),
@@ -41,19 +23,6 @@ namespace XFCamera2APIBasic.CustomRenderers
             {
                 SetValue(IsPreviewingProperty, value);
             }
-        }
-
-        //とりあえず何かやりとりするプロパティ
-        public static readonly BindableProperty HogeProperty = BindableProperty.Create(
-            propertyName: "Hoge",
-            returnType: typeof(object),
-            declaringType: typeof(CameraPreview),
-            defaultValue: null);
-
-        public object Hoge
-        {
-            get { return (object)GetValue(HogeProperty); }
-            set { SetValue(HogeProperty, value); }
         }
     }
 

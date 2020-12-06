@@ -1,9 +1,7 @@
 ﻿using Android.Content;
 using Android.Views;
 using Android.Widget;
-using System;
 using System.ComponentModel;
-using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using XFCamera2APIBasic.CustomRenderers;
@@ -21,13 +19,14 @@ namespace XFCamera2APIBasic.Droid.CustomRenderers
         public CameraPreviewRenderer(Context context) : base(context)
         {
             this._context = context;
+
+            _droidCameraPreview = new DroidCameraPreview(_context);
         }
 
         protected override void OnElementChanged(ElementChangedEventArgs<CameraPreview> e)
         {
             base.OnElementChanged(e);
 
-            _droidCameraPreview = new DroidCameraPreview(this._context);
 
             this.SetNativeControl(_droidCameraPreview);
 
@@ -62,11 +61,6 @@ namespace XFCamera2APIBasic.Droid.CustomRenderers
         private readonly Context _context;
         private readonly TextureView _cameraTexture;
 
-        public Android.Widget.LinearLayout _linearLayout { get; }
-        public bool OpeningCamera { private get; set; }
-        public long FrameNumber { get; private set; }
-        public Android.Graphics.Bitmap Frame { get; private set; }
-
         private bool _isPreviewing;
         public bool IsPreviewing
         {
@@ -92,7 +86,6 @@ namespace XFCamera2APIBasic.Droid.CustomRenderers
         {
             this._context = context;
 
-            #region プレビュー用のViewを用意する.
             //予め用意しておいたレイアウトファイルを読み込む場合はこのようにする
             //この場合,Resource.LayoutにCameraLayout.xmlファイルを置いている.
             //中身はTextureViewのみ
@@ -102,14 +95,10 @@ namespace XFCamera2APIBasic.Droid.CustomRenderers
             var view = inflater.Inflate(Resource.Layout.CameraPreviewLayout, this);
             _cameraTexture = view.FindViewById<TextureView>(Resource.Id.cameraTexture);
 
-            #region リスナーの登録
             var surfaceTextureListener = new CameraSurfaceTextureListener(_cameraTexture);
-
             _cameraTexture.SurfaceTextureListener = surfaceTextureListener;
-            #endregion
 
             _cameraTexture.Visibility = ViewStates.Invisible;
-            #endregion
         }
     }
 }
