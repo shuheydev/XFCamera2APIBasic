@@ -35,7 +35,7 @@ namespace XFCamera2APIBasic
             {
                 status = await Permissions.RequestAsync<Permissions.Camera>();
             }
-            
+
             return status;
         }
     }
